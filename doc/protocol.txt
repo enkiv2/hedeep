@@ -1,0 +1,35 @@
+HEDEEP PROTOCOL
+
+Introduction:
+In the below, angle brackets ('<' and '>') surround a variable, and curly 
+braces ('{' and '}') surround a tuple. Commas (',') separate values. The first
+column is the message, and the second column is the description of the message.
+
+The first section, 'Nodes', describes those messages that must be handled by 
+nodes. The second section, 'Server', describes those messages handled by the 
+server, supplied as 'serve.erl' in this distribution.
+
+
+Nodes:
+
+{ map, <token>}			Maps the function on token, and when finished, 
+				sends { collect, { <token>, <evaluation> } } to
+				the server*.
+{ reduce, {<key>, <value>}}	Performs the reduce function on the key value 
+				pair*.
+
+*All nodes will be asked to perform the mapping operation. Only the first node 
+in the list of nodes passed to serve/2 will be asked to reduce, and will be 
+the accumulator. 
+
+
+
+Server:
+
+{serve, <data>}			Call serve/2 with the original list of nodes 
+				and the new data
+{serve, <nodes>, <data>}	Call serve/2 with the supplied nodes and data
+{collect, {<key>, <value>}}	This should be sent by the mapper, and upon 
+				reception sends a reduce message to the reducer
+
+

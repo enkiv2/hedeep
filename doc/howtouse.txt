@@ -1,0 +1,54 @@
+HOW TO USE HEDEEP
+
+Example 1: word count
+
+-module('wc').
+-export([mainloop/0]).
+-import('et').
+
+callbackwithone([]) -> true;
+callbackwithone(X) ->
+	server ! {collect, {hd(X), 1}},
+	callbackwithone(tl(X)).
+
+mainloop() ->
+	receive 
+		{map, X} 		->	callbackwithone(X);
+		{reduce, {X, Y}}	->	Z = et:get(values, X), 
+						et:write(values, {X, Z + Y})
+	end, mainloop().
+
+
+
+All your code needs is to receive those two messages and respond appropriately.
+The server would be called with:
+	serve:serve(Nodes, ListOfLines).
+Where the second argument is a list of lines each a list of words.
+After all computation is over, the first item in the list of nodes will contain
+the updated table of word frequencies.
+
+
+Example 2: index
+
+-module('index').
+-export([mainloop/0]).
+-import ('et').
+
+callback([]) -> true;
+callback({X, Y}) -> server ! {collect, {X, Y}} ;
+callback(X) ->
+	callback(hd(X)),
+	callback(tl(X)).
+
+mainloop() ->
+	receive
+		{map, X}		-> 	callback(X);
+		{reduce, {X, Y}}	-> 	Z = et:get(values, X),
+						et:write(values, {X, 
+						lists:append(Z, Y}})
+	end, mainloop().
+
+Given a list of tuples containing a word and a page number, this generates a 
+database of all pages containing a given word.
+
+

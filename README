@@ -1,0 +1,14 @@
+__________________________________________\
+|------------------------------------------->
+|HH  HH EEEE DDD   EEEEE EEEEE PPPP----------->
+|HH  HH EE   DD DD EE    EE    PP  PP----------->
+|HHHHHH EEEE DD  D EEEEE EEEEE PPPP--------------->
+|HH  HH EE   DD DD EE    EE    PP--------------->
+|HH  HH EEEE DDD   EEEEE EEEEE PP------------->
+|------------------------------------------->
+|--(c) 2009 John Ohno-------------------->
+|-------------------------------------->
+
+Hedeep is a simplified version of hadoop's map-reduce framework in erlang.
+
+

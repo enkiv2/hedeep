@@ -1,0 +1,7 @@
+all: test
+
+clean:
+
+test:
+
+
