@@ -1,5 +1,5 @@
 -module('serve').
--export([serve/2]).
+-export([serve/2, mainloop/1]).
 
 serve(Nodes, Data) -> serve_r(Nodes, Data), mainloop(Nodes).
 
