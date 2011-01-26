@@ -14,6 +14,13 @@ clean: FORCE
 dist: clean
 	tar -cz ../hedeep > ../hedeep.tgz
 
+pull: clean
+	git pull origin master 
+
+push: pull
+	git commit -a
+	git push origin master
+
 FORCE:
 
 
