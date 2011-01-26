@@ -15,5 +15,5 @@ mainloop(Nodes) ->
 	end.
 
 reduce(Key, Value, Node) ->
-	Node ! {reduce, {Key, Value}}.
+	Node ! {collect, {Key, Value}}.
 
